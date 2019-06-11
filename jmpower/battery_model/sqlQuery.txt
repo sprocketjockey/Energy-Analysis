@@ -1,0 +1,1 @@
+SELECT resource_name, EXTRACT(DOY FROM date), interval, lmp_prc FROM (SELECT resource_name, interval, date, lmp_prc, rank() OVER (PARTITION BY date ORDER BY lmp_prc DESC) FROM lmp_rtm WHERE resource_name = 'WHITEWTR_7_B1' AND date >= '2017-01-01'::date ORDER BY date) as A WHERE rank < 66;
